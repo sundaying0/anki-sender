@@ -1,0 +1,9 @@
+{
+	"id": "anki-sender",
+	"name": "Anki Sender",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Send selected text to Anki from Obsidian.",
+	"author": "sun",
+	"isDesktopOnly": true
+}
