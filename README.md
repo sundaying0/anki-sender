@@ -1,3 +1,5 @@
+[中文](README_CN.md)
+
 # Anki Sender
 
 Send selected text from Obsidian to Anki with one click. Supports single and batch sending, automatic word-root tagging, and pronunciation audio.

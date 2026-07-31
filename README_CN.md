@@ -1,3 +1,5 @@
+[English](README.md)
+
 # Anki Sender
 
 一键将 Obsidian 中选中的文本发送到 Anki。支持单个和批量发送、自动词根标记、发音音频。
