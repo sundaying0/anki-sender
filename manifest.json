@@ -3,7 +3,7 @@
 	"name": "Anki Sender",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Send selected text to Anki from Obsidian.",
+	"description": "Send selected text to Anki with one click.",
 	"author": "sun",
 	"isDesktopOnly": true
 }
