@@ -548,23 +548,17 @@ class AnkiSenderPlugin extends obsidian.Plugin {
         if (!pronunciations.length) return '';
         const btnStyle = 'background:#f0f0f0;border:1px solid #ccc;border-radius:4px;padding:4px 12px;cursor:pointer;font-size:14px;margin-right:6px;';
         const buttons = pronunciations
-            .map(p => `<button id="anki-play-${p.word}" style="${btnStyle}">🔊 ${p.word}</button>`)
+            .map(p => {
+                const onclick = `var v=+(localStorage.getItem('anki-sender-vol')||'0.8');` +
+                    `var a=new Audio('${p.word}.mp3');a.volume=v;a.play();`;
+                return `<button id="anki-play-${p.word}" style="${btnStyle}" onclick="${onclick}">🔊 ${p.word}</button>`;
+            })
             .join('');
         const volumeBar = `<span style="margin-left:8px;font-size:13px;color:#888;">🔈</span>` +
-            `<input id="anki-vol" type="range" min="0" max="100" value="80" style="width:80px;vertical-align:middle;">` +
+            `<input id="anki-vol" type="range" min="0" max="100" value="80" style="width:80px;vertical-align:middle;" ` +
+            `oninput="var v=this.value/100;document.getElementById('anki-vol-val').textContent=v.toFixed(1);localStorage.setItem('anki-sender-vol',v);">` +
             `<span id="anki-vol-val" style="font-size:12px;color:#888;">0.8</span>`;
-        const script = `<script>` +
-            `(function(){` +
-            `var v=+(localStorage.getItem('anki-sender-vol')||'0.8');` +
-            `var sl=document.getElementById('anki-vol');` +
-            `var lb=document.getElementById('anki-vol-val');` +
-            `if(sl){sl.value=Math.round(v*100);lb.textContent=v.toFixed(1);` +
-            `sl.oninput=function(){v=this.value/100;lb.textContent=v.toFixed(1);localStorage.setItem('anki-sender-vol',v);};}` +
-            `document.querySelectorAll('[id^=anki-play-]').forEach(function(b){` +
-            `b.onclick=function(){var a=new Audio(this.id.replace('anki-play-','')+'.mp3');a.volume=v;a.play();};});` +
-            `})();` +
-            `</script>`;
-        return `<div style="margin-top:8px;">${buttons}${volumeBar}${script}</div>`;
+        return `<div style="margin-top:8px;">${buttons}${volumeBar}</div>`;
     }
     // --------------------------------------------------------
     // 发音获取（Merriam-Webster API）
